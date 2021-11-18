@@ -59,6 +59,20 @@ namespace PWAPhotos
             {
                 endpoints.MapControllers();
             });
+
+            UpgradeDatabase(app);
+        }
+
+        private void UpgradeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<DBContext>();
+                if (context != null && context.Database != null)
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

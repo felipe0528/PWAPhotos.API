@@ -10,7 +10,6 @@ namespace PWAPhotos.Data
     {
         public static async Task InitializeAsync(DBContext context)
         {
-            context.Database.EnsureCreated();
 
             // Look for any students.
             if (context.Images.Any())
@@ -34,7 +33,6 @@ namespace PWAPhotos.Data
                     Data= bytes2
                 }
             };
-
 
             foreach (ImageDTO i in images)
             {
